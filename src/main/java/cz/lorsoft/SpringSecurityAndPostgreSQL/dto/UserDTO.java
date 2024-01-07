@@ -36,6 +36,11 @@ public class UserDTO {
     public UserDTO() {
     }
 
+    @Override
+    public String toString() {
+        return String.format("%n%s, %s, %s, %s, %s, %s", userId, name, email, city, birthDate, admin);
+    }
+
     public long getUserId() {
         return userId;
     }

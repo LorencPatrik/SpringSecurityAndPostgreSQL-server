@@ -3,13 +3,12 @@ package cz.lorsoft.SpringSecurityAndPostgreSQL.controller;
 import cz.lorsoft.SpringSecurityAndPostgreSQL.dto.UserDTO;
 import cz.lorsoft.SpringSecurityAndPostgreSQL.service.UserService;
 import jakarta.validation.Valid;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class UserController {
-
 
     private UserService userService;
     public UserController(UserService userService) {
@@ -17,18 +16,36 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public UserDTO addUser(@RequestBody @Valid UserDTO userDTO) {
-        System.out.println("controller");
-        System.out.println(userDTO.getUserId());
-        System.out.println(userDTO.getBirthDate());
-        System.out.println(userDTO.getCity());
-        System.out.println(userDTO.getPassword());
-        System.out.println(userDTO.getEmail());
-        System.out.println(userDTO.getName());
-        System.out.println(userDTO.isAdmin());
-
-        return userService.create(userDTO);
+    public void addUser(@RequestBody @Valid UserDTO userDTO) {
+        System.out.println("controller Post - new user");
+        userService.create(userDTO);
     }
 
+    @GetMapping("/user/{userId}")
+    public UserDTO getUser(@PathVariable Long userId) {
+        System.out.println("controller Get - one user");
+        UserDTO user = userService.getUser(userId);
+        System.out.println(user);
+        return user;
+    }
 
+    @GetMapping("/user")
+    public List<UserDTO> getUsers() {
+        System.out.println("controller Get - users");
+        List<UserDTO> users = userService.getUsers();
+        System.out.println(users);
+        return users;
+    }
+
+    @PutMapping("/user")
+    public void updateUser(@RequestBody @Valid UserDTO userDTO) {
+        System.out.println("controller Put - user");
+        userService.update(userDTO);
+    }
+
+    @DeleteMapping("/user/{userId}")
+    public void deleteUser(@PathVariable Long userId) {
+        System.out.println("controller Delete - user");
+        userService.delete(userId);
+    }
 }
