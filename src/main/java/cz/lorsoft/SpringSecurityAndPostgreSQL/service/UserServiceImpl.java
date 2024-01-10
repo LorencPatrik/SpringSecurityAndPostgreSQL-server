@@ -28,7 +28,6 @@ public class UserServiceImpl implements UserService{
             final UserEntity filledEntity = fillEntity(userEntity, userDTO);
             filledEntity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             userRepository.save(filledEntity);
-            return;
         } catch (DataIntegrityViolationException e) {
             throw new DuplicateEmailException();
         }
@@ -36,8 +35,8 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public UserDTO getUser(long userId) {
-        final UserEntity fetchedPerson = userRepository.getById(userId);
-        return fillDTO(fetchedPerson);
+            final UserEntity fetchedPerson = userRepository.getById(userId); // Exception will catch DuplicateEmailExceptionAdvice...
+            return fillDTO(fetchedPerson);
     }
 
     @Override
@@ -52,17 +51,17 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void update(UserDTO userDTO) {
-        final UserEntity fetchedUser = userRepository.getById(userDTO.getUserId());
+        final UserEntity fetchedUser = userRepository.getById(userDTO.getUserId()); // Exception will catch DuplicateEmailExceptionAdvice...
         final UserEntity updatedEntity = fillEntity(fetchedUser, userDTO);
-        updatedEntity.setPassword(userDTO.getPassword());
+        updatedEntity.setPassword(passwordEncoder.encode(userDTO.getPassword()));
         userRepository.save(updatedEntity);
     }
 
     @Override
     public void delete(long userId) {
-        userRepository.deleteById(userId);
+        userRepository.deleteById(userId); // We don't need to catch Expection here, because if the entity isn't found it is silently ignored...
     }
-    //Todo: odchytit vyjímku při pokusu vymazan neexistujícího uživ...
+
 
     // region: Private methods
 
