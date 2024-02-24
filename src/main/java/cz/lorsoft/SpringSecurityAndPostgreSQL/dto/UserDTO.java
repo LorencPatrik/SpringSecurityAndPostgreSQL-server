@@ -2,7 +2,7 @@ package cz.lorsoft.SpringSecurityAndPostgreSQL.dto;
 
 import jakarta.validation.constraints.*;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class UserDTO {
     private long userId;
@@ -20,10 +20,10 @@ public class UserDTO {
     private String city;
     @Past
     @NotNull (message = "Zadejte datum narození")
-    private Date birthDate;
+    private LocalDate birthDate;
     private boolean admin = false;
 
-    public UserDTO(long userId, String name, String email, String password, String city, Date birthDate, boolean admin) {
+    public UserDTO(long userId, String name, String email, String password, String city, LocalDate birthDate, boolean admin) {
         this.userId = userId;
         this.name = name;
         this.email = email;
@@ -81,11 +81,11 @@ public class UserDTO {
         this.city = city;
     }
 
-    public Date getBirthDate() {
+    public LocalDate getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(Date birthDate) {
+    public void setBirthDate(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
 

@@ -1,8 +1,11 @@
 package cz.lorsoft.SpringSecurityAndPostgreSQL.entity.repository;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
+
 
 @Entity
 @Table(name = "user_table", schema = "public")
@@ -19,7 +22,7 @@ public class UserEntity {
     @Column(nullable = false)
     private String city;
     @Column(nullable = false)
-    private Date birthDate;
+    private LocalDate birthDate;
     @Column(nullable = false)
     private boolean admin = false;
 
@@ -41,14 +44,6 @@ public class UserEntity {
 
     public void setCity(String city) {
         this.city = city;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
     }
 
     public String getEmail() {
@@ -73,5 +68,13 @@ public class UserEntity {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public LocalDate getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(LocalDate birthDate) {
+        this.birthDate = birthDate;
     }
 }

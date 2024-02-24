@@ -29,7 +29,7 @@ public class UserController {
         return user;
     }
 
-    @GetMapping("/user")
+    @GetMapping("/users")
     public List<UserDTO> getUsers() {
         System.out.println("controller Get - users");
         List<UserDTO> users = userService.getUsers();

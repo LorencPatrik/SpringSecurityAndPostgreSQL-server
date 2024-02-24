@@ -1,5 +1,4 @@
 
-
 export class HttpRequestError extends Error {
     constructor(response) {
         super(`Network response was not ok: ${response.status} ${response.statusText}`);
@@ -17,7 +16,9 @@ const fetchData = (url, requestOptions) => {
             if (!response.ok) {
                 throw new HttpRequestError(response);
             }
-            return response.json();
+            if (requestOptions.method ==="GET")
+                return response.json();
+            return; // v této aplikaci neočekávám od beckendu vrácený JSON po akcích PUT, POST, DELETE... v samotné response jsou informace o stavu provedeného fetch, můžeme si je vrátit (response.status)
         })
         .catch((error) => {
             throw error;
@@ -35,7 +36,6 @@ export const apiGet = (url) => {
     const requestOptions = {
         method: "GET",
     };
-
     return fetchData(apiUrl, requestOptions);
 };
 
@@ -45,7 +45,6 @@ export const apiPost = (url, data) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
     };
-
     return fetchData(url, requestOptions);
 };
 
@@ -55,7 +54,6 @@ export const apiPut = (url, data) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
     };
-
     return fetchData(url, requestOptions);
 };
 
@@ -63,6 +61,5 @@ export const apiDelete = (url) => {
     const requestOptions = {
         method: "DELETE",
     };
-
     return fetchData(url, requestOptions);
 };
