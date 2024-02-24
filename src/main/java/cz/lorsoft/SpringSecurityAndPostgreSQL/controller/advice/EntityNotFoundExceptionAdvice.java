@@ -1,7 +1,6 @@
 package cz.lorsoft.SpringSecurityAndPostgreSQL.controller.advice;
 
 import jakarta.persistence.EntityNotFoundException;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

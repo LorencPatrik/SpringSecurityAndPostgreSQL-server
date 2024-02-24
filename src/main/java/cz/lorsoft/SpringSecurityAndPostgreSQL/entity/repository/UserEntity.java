@@ -1,8 +1,6 @@
 package cz.lorsoft.SpringSecurityAndPostgreSQL.entity.repository;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
