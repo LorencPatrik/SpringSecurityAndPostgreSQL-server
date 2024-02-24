@@ -6,7 +6,6 @@ import FlashMessage from "../components/FlashMessage";
 import UserContext from "./UserContext";
 
 function ShowUsers() {
-    // show all users from database
 
     const [isLoading, setIsloading] = useState(true);
     const [users, setUsers] = useState(undefined);
