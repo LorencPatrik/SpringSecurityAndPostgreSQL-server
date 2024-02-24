@@ -30,7 +30,6 @@ export const apiGet = (url) => {
     // const filteredParams = Object.fromEntries(
     // Object.entries(params || {}).filter(([_, value]) => value != null)
     // );
-
     // const apiUrl = `${url}?${new URLSearchParams(filteredParams)}`;
     const apiUrl = `${url}`;
     const requestOptions = {
